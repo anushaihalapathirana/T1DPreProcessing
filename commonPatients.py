@@ -1,5 +1,6 @@
 
 import pandas as pd
+import numpy as np
 import csv
 import os, glob
 
@@ -107,32 +108,87 @@ def commonElements(arr):
   
     return list(result) 
 
+# method to get unique ID list in csv files
+def getUniqueID(fileName):
+    data = pd.read_csv(fileName)
+    df1=data.drop_duplicates(subset="PtID",keep="first")
+    return df1.PtID.array
+
+
 # this method is to check how many patients left the study during the period
 def patientsProcess():
-    data20102012 = pd.read_csv(file20102012)
-    df1=data20102012.drop_duplicates(subset="PtID",keep="first")
-    unique_ids20102012 = df1.PtID.array
-    
-    data20152016 = pd.read_csv(file20152016)
-    df1=data20152016.drop_duplicates(subset="PtID",keep="first")
-    unique_ids20152016 = df1.PtID.array
+    unique_ids20102012 = getUniqueID(file20102012)
+    unique_ids20152016 = getUniqueID(file20152016)
+    unique_ids20162017 = getUniqueID(file20162017)
+    unique_ids20172018 = getUniqueID(file20172018)
+    unique_idsLongi = getUniqueID(fileLongitudinal)
 
-    data20162017 = pd.read_csv(file20162017)
-    df1=data20162017.drop_duplicates(subset="PtID",keep="first")
-    unique_ids20162017 = df1.PtID.array
-
-    data20172018 = pd.read_csv(file20172018)
-    df1=data20172018.drop_duplicates(subset="PtID",keep="first")
-    unique_ids20172018 = df1.PtID.array
-
-    dataLongi = pd.read_csv(fileLongitudinal)
-    df1=dataLongi.drop_duplicates(subset="PtID",keep="first")
-    unique_idsLongi = df1.PtID.array
-
-    arr = [unique_ids20102012, unique_ids20152016,unique_ids20162017,unique_ids20172018,unique_idsLongi] 
+    print('new patients in 2010/12: ', len(unique_ids20102012))
+    # patients data in 2010
+    arr = [unique_ids20102012, unique_ids20152016] 
     output = commonElements(arr) 
-    print ("Common Element in 2010-2012 data set and 2015-2016 data set= ",len(output)) 
+    print ("Common number of patients in 2010-2012 data set and 2015-2016 data set= ",len(output)) 
 
+    arr2 = [unique_ids20102012, unique_ids20152016,unique_ids20162017] 
+    output2 = commonElements(arr2) 
+    print ("Common number of patients in 2010-2012 data set and 2016-2017 data set= ",len(output2)) 
+
+    arr3 = [unique_ids20102012, unique_ids20152016,unique_ids20162017,unique_ids20172018] 
+    output3 = commonElements(arr3) 
+    print ("Common number of patients in 2010-2012 data set and 2017-2018 data set= ",len(output3)) 
+
+    print("-----------------------------------------------")
+    # 2015 new patients 
+    # print("All patients in 2015 list: ",len(unique_ids20152016))
+
+   # remove all the elements in 2010 list to get new 2015 patients list
+    newPatients2015 = [x for x in unique_ids20152016 if x not in unique_ids20102012]
+ 
+    print('new patients in 2015/16: ', len(newPatients2015))
+
+    arr5 = [unique_ids20102012, newPatients2015] 
+    output5 = commonElements(arr5) 
+    print ("Common number of patients in 2010-2012 data set and 2015-2016 data set= ",len(output5))
+
+    arr6 = [newPatients2015, unique_ids20162017] 
+    output6 = commonElements(arr6) 
+    print ("Common number of patients in 2015-2016 data set and 2016-2017 data set= ",len(output6))
+
+    arr7 = [newPatients2015, unique_ids20172018] 
+    output7 = commonElements(arr7) 
+    print ("Common number of patients in 2015-2016 data set and 2017-2018 data set= ",len(output7))
+    
+    print("-----------------------------------------------")
+    # 2016 new patients 
+    # print("All patients in 2016/17 list: ",len(unique_ids20162017))
+
+   # remove all the elements in 2010 list to get new 2015 patients list
+    newPatients2016 = [x for x in unique_ids20162017 if x not in newPatients2015]
+ 
+    print('new patients in 2016/17: ', len(newPatients2016))
+
+    arr8 = [newPatients2015, newPatients2016] 
+    output8 = commonElements(arr8) 
+    print ("Common number of patients in 2015/16 data set and 2016/17 data set= ",len(output8))
+
+    arr9 = [newPatients2016, unique_ids20172018] 
+    output9 = commonElements(arr9) 
+    print ("Common Element in 2016/17 data set and 2017/18 data set= ",len(output9))
+
+
+    print("-----------------------------------------------")
+    # 2017 new patients 
+    # print("All patients in 2017/18 list: ",len(unique_ids20172018))
+
+   # remove all the elements in 2010 list to get new 2015 patients list
+    newPatients2017 = [x for x in unique_ids20172018 if x not in newPatients2016]
+ 
+    print('new patients in 2017/18: ', len(newPatients2017))
+
+    arr10 = [newPatients2016, newPatients2017] 
+    output10 = commonElements(arr10) 
+    print ("Common Element in 2016/17 data set and 2017/18 data set= ",len(output10))
+   
 
 
 # createDiffMedicineFile()
