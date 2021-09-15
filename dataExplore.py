@@ -40,6 +40,16 @@ def getAnnualIncome(df):
     print('greater than 100 percentage: ',countLevel3/fullCount*100)
 
 
+def getbmi(df):
+    underweight = df[df['bmi'] < 18.5]['PtID'].count()
+    healthy = df[(df['bmi'] >= 18.5) & (df['bmi'] < 25)]['PtID'].count()
+    overweight = df[(df['bmi'] >= 25) & (df['bmi'] < 30)]['PtID'].count()
+    obesity = df[df['bmi'] >= 30 ]['PtID'].count()
+
+    print('underweight: ', underweight/fullCount*100)
+    print('healthy: ', healthy/fullCount*100)
+    print('overweight: ', overweight/fullCount*100)
+    print('obesity: ', obesity/fullCount*100)
 
 
 getGenderCount(df)
@@ -48,3 +58,4 @@ getAgeCounts(df)
 print('----------------------------------')
 getAnnualIncome(df)
 print('----------------------------------')
+getbmi(df)
