@@ -40,44 +40,19 @@ def readConverToCSV(file_dir, output_file):
     for file in files:
         if os.path.isfile(os.path.join(file_dir, file)):
             f = open(os.path.join(file_dir, file),'r', encoding="utf-8", errors='ignore')
-            
-            new_data = []
-            for line in f:
-                
-                line = line.replace("|", ",")
-                new_data += [line]
+            # print(f.name)
+            df = pd.read_csv(os.path.join(file_dir, file), sep='|', engine='python', quotechar='"', error_bad_lines=False)
             
             file_name = os.path.basename(f.name)
-            updated_file_name = file_name.split('.')[0]+"_new.csv"
+            # updated_file_name = file_name.split('.')[0]+"_new.csv"
             
-            textfile = open(output_file+updated_file_name, "w")
-
-            for element in new_data:
-                textfile.write(element)
-            textfile.close()
+            newOutput = "Preprocessed"+file_name.split('.')[0]+"_new.csv"
+            textfile =output_file+newOutput
+            df.to_csv(textfile, na_rep='NA')
+            getUniquePatients(textfile, newOutput)
 
             f.close()
-  
-# remove missing values and save to csv
-def preProssData():
-    # reading two csv files
-    missing_values = ["n/a", "na", '']
 
-    # csvFile0, csvFile1 etc variables created 
-    for idx, val in enumerate(outputPaths):
-        globals()['csvFile%s' % idx] = [f for f in listdir(val) if isfile(join(val, f))] 
-        prepath = prePaths[idx]
-        for i, value in enumerate([f for f in listdir(val) if isfile(join(val, f))]):
-           
-            keyword = 'Preprocessed'
-            for fname in os.listdir(val):
-                if keyword in fname:
-                    print("already processed")
-                else: 
-                    data1 = pd.read_csv(val+value, error_bad_lines=False, na_values = missing_values, header = None)
-                    newOutput = "Preprocessed"+value.split('_')[0]+".csv"
-                    data1.to_csv(prepath+newOutput, header=None, na_rep='NaN')
-            getUniquePatients(prepath+newOutput, newOutput)
 
 # get unique patients count
 def getUniquePatients(path, file):
@@ -91,7 +66,6 @@ def getUniquePatients(path, file):
 
 def convertAllFiles():
     for idx, val in enumerate(originalPaths):
-        readConverToCSV(val, outputPaths[idx])
+        readConverToCSV(val, prePaths[idx])
 
 convertAllFiles()
-preProssData()
