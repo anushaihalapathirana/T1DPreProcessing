@@ -51,12 +51,31 @@ def getbmi(df):
     print('overweight: ', overweight/fullCount*100)
     print('obesity: ', obesity/fullCount*100)
 
+def getMaxvalues(df, colName):
+    column = df[colName]
+    max_value = column.max() 
+    return max_value
+
+def getMinvalues(df, colName):
+    column = df[colName]
+    min_value = column.min() 
+    return min_value
+
+def getAverage(df, colName):
+    column = df[colName]
+    avg_value = column.mean() 
+    return avg_value
 
 getGenderCount(df)
 print('----------------------------------')
 getAgeCounts(df)
+print('Maximum age: ', getMaxvalues(df,'age'))
+print('Minimum age: ', getMinvalues(df,'age'))
+print('Average age: ', getAverage(df,'age'))
+
 print('----------------------------------')
 getAnnualIncome(df)
 print('----------------------------------')
 getbmi(df)
 print('----------------------------------')
+
