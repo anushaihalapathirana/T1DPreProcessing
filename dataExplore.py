@@ -1,7 +1,7 @@
 import pandas as pd  
 pd.options.mode.chained_assignment = None
 
-df = pd.read_csv('/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedVisitsLong.csv')
+df = pd.read_csv('/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedVisitsLong_new.csv')
 df = df.drop_duplicates('PtID')
 fullCount = df['PtID'].count()
 

@@ -4,11 +4,11 @@ import numpy as np
 import csv
 import os, glob
 
-file20102012 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Initial Enrollment (2010-2012)/preFiles/PreprocessedMedications.csv'
-file20152016 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2015-2016/preFiles/PreprocessedMedications15-16.csv'
-file20162017 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2016-2017/preFiles/PreprocessedMedication16-17.csv'
-file20172018 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2017-2018/preFiles/PreprocessedMedication17-18.csv'
-fileLongitudinal = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedMedsLong.csv'
+file20102012 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Initial Enrollment (2010-2012)/preFiles/PreprocessedMedications_new.csv'
+file20152016 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2015-2016/preFiles/PreprocessedMedications15-16_new.csv'
+file20162017 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2016-2017/preFiles/PreprocessedMedication16-17_new.csv'
+file20172018 = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - 2017-2018/preFiles/PreprocessedMedication17-18_new.csv'
+fileLongitudinal = '/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedMedsLong_new.csv'
 
 
 # Python program to find the common elements
@@ -191,6 +191,6 @@ def patientsProcess():
    
 
 
-# createDiffMedicineFile()
-# getUniqueCount()
+createDiffMedicineFile()
+getUniqueCount()
 patientsProcess()
