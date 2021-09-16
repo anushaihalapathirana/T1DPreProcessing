@@ -154,7 +154,7 @@ def patientsProcess():
     output6 = commonElements(arr6) 
     print ("Common number of patients in 2015-2016 data set and 2016-2017 data set= ",len(output6))
 
-    arr7 = [newPatients2015, unique_ids20172018] 
+    arr7 = [newPatients2015,unique_ids20162017, unique_ids20172018] 
     output7 = commonElements(arr7) 
     print ("Common number of patients in 2015-2016 data set and 2017-2018 data set= ",len(output7))
     
@@ -188,9 +188,8 @@ def patientsProcess():
     arr10 = [newPatients2016, newPatients2017] 
     output10 = commonElements(arr10) 
     print ("Common Element in 2016/17 data set and 2017/18 data set= ",len(output10))
-   
 
-
+# createIDDrugListFile()
 createDiffMedicineFile()
 getUniqueCount()
 patientsProcess()

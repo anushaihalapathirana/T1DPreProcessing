@@ -25,19 +25,31 @@ def getAgeCounts(df):
     print('Adults percentage: ',countAdults/fullCount*100)
 
 def getAnnualIncome(df):
-    df['Pt_AnnualInc'] =  df['Pt_AnnualInc'].str.replace(r'$', '')
+    # df['Pt_AnnualInc'] =  df['Pt_AnnualInc'].str.replace(r'$', '')
 
-    df['Pt_AnnualInc'] = pd.to_numeric(df['Pt_AnnualInc'], errors='coerce')
-    df = df.dropna(subset=['Pt_AnnualInc'])
-    df['Pt_AnnualInc'] = df['Pt_AnnualInc'].astype(int)
+    # print(df['Pt_AnnualInc'])
 
-    countLevel1 = df[df['Pt_AnnualInc'] <= 50]['PtID'].count()
-    countLevel2 = df[(df['Pt_AnnualInc'] >50) & (df['Pt_AnnualInc'] < 100)]['PtID'].count()
-    countLevel3 = df[(df['Pt_AnnualInc'] >=100)]['PtID'].count()
+    # df['Pt_AnnualInc'] = pd.to_numeric(df['Pt_AnnualInc'], errors='coerce')
+    # df = df.dropna(subset=['Pt_AnnualInc'])
+    # df['Pt_AnnualInc'] = df['Pt_AnnualInc'].astype(int)
 
-    print('lessthan 50 percentage: ',countLevel1/fullCount*100)
-    print('50-100 percentage: ',countLevel2/fullCount*100)
-    print('greater than 100 percentage: ',countLevel3/fullCount*100)
+    countLevel1 = df[df['Pt_AnnualInc'] == 'Less than 25,000']['PtID'].count()
+    countLevel2 = df[df['Pt_AnnualInc'] == '$25,000 - $35,000']['PtID'].count()
+    countLevel3 = df[df['Pt_AnnualInc'] == "$35,000 - less than $50,000"]['PtID'].count()
+    countLevel4 = df[df['Pt_AnnualInc'] == '$50,000 - less than $75,000']['PtID'].count()
+    countLevel5 = df[df['Pt_AnnualInc'] == '$75,000 - less than $100,000']['PtID'].count()
+    countLevel6 = df[df['Pt_AnnualInc'] == '$100,000 - less than $200,000']['PtID'].count()
+    countLevel7 = df[df['Pt_AnnualInc'] == '$200,000 or more']['PtID'].count()
+
+
+    print('lessthan 25000 percentage: ',countLevel1/fullCount*100)
+    print('25-35 percentage: ',countLevel2/fullCount*100)
+    print('35-50 percentage: ',countLevel3/fullCount*100)
+    print('50-75 percentage: ',countLevel4/fullCount*100)
+    print('75-100 percentage: ',countLevel5/fullCount*100)
+    print('100-00 percentage: ',countLevel6/fullCount*100)
+    print('200+ percentage: ',countLevel7/fullCount*100)
+
 
 
 def getbmi(df):
