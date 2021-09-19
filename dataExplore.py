@@ -78,6 +78,15 @@ def getAverage(df, colName):
     avg_value = column.mean() 
     return avg_value
 
+def patientsContinueStudieIn5Yrs():
+    df = pd.read_csv('/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedVisitsLong_new.csv')
+    df = df.loc[(df['Visit'] == 'Enrollment1')]
+    df = df.drop_duplicates('PtID')
+    fullCount = df['PtID'].count()
+    print(fullCount)
+
+
+getIdListVisit()
 getGenderCount(df)
 print('----------------------------------')
 getAgeCounts(df)
