@@ -85,18 +85,35 @@ def patientsContinueStudieIn5Yrs():
     fullCount = df['PtID'].count()
     print(fullCount)
 
+def getIdListVisit():
+    df = pd.read_csv('/home/kali/Documents/thesis/Preprocessing_codes/focus dataset/Registry - Longitudinal/preFiles/PreprocessedVisitsLong_new.csv')
+    # df = df.loc[(df['Visit'] == 'Enrollment1') | (df['Visit'] == 'Enrollment2')]
+    df1 = df[df['Visit'].isin(['Enrollment1'])]
+    df2 = df[df['Visit'].isin(['Year 5'])]
+
+    
+    # print(df.head())
+    df1 = df1.drop_duplicates('PtID')
+    df2 = df2.drop_duplicates('PtID')
+
+    df_merge = pd.merge(df1, df2, on=['PtID'], how='inner')
+  
+    fullCount1 = df_merge['PtID'].count()
+
+    print(fullCount1)
+   
 
 getIdListVisit()
-getGenderCount(df)
-print('----------------------------------')
-getAgeCounts(df)
-print('Maximum age: ', getMaxvalues(df,'age'))
-print('Minimum age: ', getMinvalues(df,'age'))
-print('Average age: ', getAverage(df,'age'))
+# getGenderCount(df)
+# print('----------------------------------')
+# getAgeCounts(df)
+# print('Maximum age: ', getMaxvalues(df,'age'))
+# print('Minimum age: ', getMinvalues(df,'age'))
+# print('Average age: ', getAverage(df,'age'))
 
-print('----------------------------------')
-getAnnualIncome(df)
-print('----------------------------------')
-getbmi(df)
-print('----------------------------------')
+# print('----------------------------------')
+# getAnnualIncome(df)
+# print('----------------------------------')
+# getbmi(df)
+# print('----------------------------------')
 
